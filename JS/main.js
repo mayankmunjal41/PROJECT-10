@@ -1,5 +1,5 @@
 
-
+  var input = document.getElementById('myInput');
 $.ajax({
   url: 'https://randomuser.me/api/?results=12',
   dataType: 'json',
@@ -25,6 +25,21 @@ $.ajax({
     randomHtml += '</ul>';
     $('.photo').html(randomHtml);
     var employees = document.querySelectorAll('.flex-layout');
+    var input = document.getElementById('myInput');
+    var filter = input.value.toUpperCase();
+    // var li = document.getElementsByTagName('li');
+
+    input.addEventListener('keyup', function () {
+      for ( var i = 0; i < employees.length; i++) {
+        var li = employees[i].getElementsByTagName("li")[0];
+        if (li.innerHTML.toUpperCase().includes(input.value.toUpperCase())) {
+            employees[i].style.display = "";
+        } else {
+            employees[i].style.display = "none";
+        }
+      }
+    })
+
     for ( var i = 0; i < employees.length; i++) {
       let obj = data.results[i];
       employees[i].addEventListener('click', function () {
@@ -53,10 +68,8 @@ $.ajax({
             $('.flex-layout').css("background-color", "white");
             $('.flex-layout').css("border-color", "lightgrey");
           })
-
+          
     })
-
-
 
   }
 
